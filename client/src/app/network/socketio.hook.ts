@@ -4,7 +4,9 @@ import { useState, useEffect, useCallback } from 'react';
 import startSocketIOService from './socketio.service';
 import { addData, ChartData } from '../store/reducers/data/data.reducer';
 
-const useDataSocket = () => {
+type CreateSocketCallback = () => void;
+
+const useDataSocket = (): CreateSocketCallback => {
   const dispatch = useDispatch();
   const [socket, setSocket] = useState<SocketIOClient.Socket>();
 
@@ -21,21 +23,26 @@ const useDataSocket = () => {
   const createSocket = useCallback(() => {
     if (process.env.REACT_APP_API_URL) {
       setSocket(startSocketIOService(process.env.REACT_APP_API_URL));
+    } else {
+      console.log(
+        'Whoops, you are missing the environment variable for your API!'
+      );
     }
   }, []);
 
-  // When the socket exists we will create a listener and define our cleanup to remove it.
+  // When the socket exists we will create a listener.
   useEffect(() => {
     if (socket) {
-      console.log('Socket listener starting.');
       socket.on('data', handleNewData);
     }
-
-    return () => {
-      console.log('Socket closing.');
-      socket && socket.close();
-    };
   }, [socket, handleNewData]);
+
+  // We only want to close the connection on unmounting
+  useEffect(() => {
+    return (): void => {
+      if (socket) socket.close();
+    };
+  }, [socket]);
 
   return createSocket;
 };

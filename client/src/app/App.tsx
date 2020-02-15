@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useDataSocket from './network/socketio.hook';
 
 function App() {
-  const data = useDataSocket();
+  const startListening = useDataSocket();
+
+  useEffect(() => {
+    startListening();
+  }, []);
 
   return (
     <div className="App">

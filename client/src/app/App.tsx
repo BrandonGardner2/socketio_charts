@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+
 import useDataSocket from './network/socketio.hook';
+import ChartContainer from './components/charts/Chart.container';
 
 function App(): React.ReactElement {
   const startListening = useDataSocket();
@@ -11,6 +13,7 @@ function App(): React.ReactElement {
   return (
     <div className="App">
       <span>Hello world</span>
+      <ChartContainer />
     </div>
   );
 }

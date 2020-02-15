@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
+
 import startSocketIOService from './socketio.service';
-import { addData, ChartData } from '../store/reducers/data/data-reducer';
+import { addData, ChartData } from '../store/reducers/data/data.reducer';
 
 const useDataSocket = () => {
   const dispatch = useDispatch();

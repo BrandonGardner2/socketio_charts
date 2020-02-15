@@ -1,0 +1,5 @@
+# Ignore built files
+build/*
+
+# ignore service worker
+src/serviceWorker.ts

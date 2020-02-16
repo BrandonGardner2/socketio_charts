@@ -10,4 +10,9 @@ const getDataSelector = createSelector(
   (dataState) => dataState.data
 );
 
-export { getDataSelector };
+const getPerCategorySelector = createSelector(
+  dataStateSelector,
+  (dataState) => dataState.perCategory
+);
+
+export { getDataSelector, getPerCategorySelector };

@@ -1,13 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, ReactElement } from 'react';
 import {
   Bar,
   BarChart,
   Cell,
-  ReferenceLine,
   Tooltip,
   XAxis,
   YAxis,
-  ResponsiveContainer
+  ResponsiveContainer,
+  ReferenceLine
 } from 'recharts';
 import { useSelector } from 'react-redux';
 import { getPerCategorySelector } from '../../store/selectors/data.selectors';
@@ -41,9 +41,10 @@ const BarChartComponent: React.FunctionComponent = () => {
           dataKey="key"
           axisLine={false}
           tickLine={false}
-          interval={'preserveStartEnd'}
+          interval={1}
           minTickGap={0}
           height={12}
+          tick={CustomizedAxisTick}
         />
         <YAxis
           hide={false}
@@ -54,13 +55,37 @@ const BarChartComponent: React.FunctionComponent = () => {
         />
         <ReferenceLine y={0} strokeDasharray="2 2" className={'zero-line'} />
         <Bar dataKey="total" animationDuration={ANIMATION_DURATION}>
-          {data.map((entry, index) => (
+          {data.map((_, index) => (
             <Cell key={`cell-${index}`} fill={`url(#${key})`} />
           ))}
         </Bar>
         <Tooltip active={true} />
       </BarChart>
     </ResponsiveContainer>
+  );
+};
+
+interface TickProps {
+  x: number;
+  y: number;
+  payload: {
+    value: string;
+  };
+}
+
+const CustomizedAxisTick = ({ x, y, payload }: TickProps): ReactElement => {
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={16}
+        textAnchor="end"
+        fill="#666"
+        transform="rotate(-35)">
+        {payload.value}
+      </text>
+    </g>
   );
 };
 

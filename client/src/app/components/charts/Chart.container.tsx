@@ -1,10 +1,11 @@
 import React, { ReactElement, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
 import { getChartSelector } from '../../store/selectors/charts.selectors';
 import { ChartType } from '../../store/reducers/charts/charts.reducer';
 import BarChartComponent from './BarChart';
-import styled from 'styled-components';
+import LineChartComponent from './LineChart';
 
 const ChartContainer = (): ReactElement => {
   const chartType = useSelector(getChartSelector);
@@ -12,7 +13,7 @@ const ChartContainer = (): ReactElement => {
   const Chart = useMemo(() => {
     switch (chartType) {
       case ChartType.LINE:
-        return <span>Line graph</span>;
+        return <LineChartComponent />;
       case ChartType.BAR:
       default:
         return <BarChartComponent />;
@@ -25,7 +26,20 @@ const ChartContainer = (): ReactElement => {
 export default ChartContainer;
 
 const ChartWrapper = styled.div`
-  width: 1000px;
+  width: 100%;
   height: 400px;
   margin: 30px auto;
+  padding: 15px 5px 50px 0px;
+
+  svg.recharts-surface {
+    overflow: visible;
+  }
+
+  path.recharts-tooltip-cursor {
+    fill: rgba(0, 0, 0, 0.2);
+  }
+
+  path.recharts-curve.recharts-tooltip-cursor {
+    stroke: rgba(0, 0, 0, 0.2);
+  }
 `;

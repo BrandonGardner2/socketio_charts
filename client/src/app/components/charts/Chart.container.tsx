@@ -1,15 +1,21 @@
 import React, { ReactElement, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { getChartSelector } from '../../store/selectors/charts.selectors';
 import { ChartType } from '../../store/reducers/charts/charts.reducer';
 import BarChartComponent from './BarChart';
 import LineChartComponent from './LineChart';
+import { ResponsiveContainer } from 'recharts';
 
-const ChartContainer = (): ReactElement => {
-  const chartType = useSelector(getChartSelector);
+type ChartData = {
+  value: number | string;
+  key: string;
+};
+export interface ChartProps {
+  metric: string;
+  chartType: ChartType;
+}
 
+const ChartContainer = ({ metric, chartType }: ChartProps): ReactElement => {
   const Chart = useMemo(() => {
     switch (chartType) {
       case ChartType.LINE:
@@ -20,16 +26,26 @@ const ChartContainer = (): ReactElement => {
     }
   }, [chartType]);
 
-  return <ChartWrapper>{Chart}</ChartWrapper>;
+  return (
+    <ChartWrapper>
+      <ChartTitle>{metric}</ChartTitle>
+      <ResponsiveContainer height="80%">{Chart}</ResponsiveContainer>
+    </ChartWrapper>
+  );
 };
 
 export default ChartContainer;
 
 const ChartWrapper = styled.div`
-  width: 100%;
-  height: 400px;
+  width: 45%;
+  height: 300px;
   margin: 30px auto;
-  padding: 15px 5px 50px 0px;
+  padding-bottom: 15px;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
   svg.recharts-surface {
     overflow: visible;
@@ -42,4 +58,12 @@ const ChartWrapper = styled.div`
   path.recharts-curve.recharts-tooltip-cursor {
     stroke: rgba(0, 0, 0, 0.2);
   }
+`;
+
+const ChartTitle = styled.h2`
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  padding: 10px 20px;
+  margin: 0;
 `;

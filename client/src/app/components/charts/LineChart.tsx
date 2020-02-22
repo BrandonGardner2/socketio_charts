@@ -18,16 +18,14 @@ const LineChartComponent = (): ReactElement => {
 
   return (
     // Manually matching height from bar chart here just in interest of time.
-    <ResponsiveContainer height={465}>
-      <LineChart data={data} margin={{ top: 5, right: 50, left: 0, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="timestamp" />
-        <YAxis domain={[-100, 100]} />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="value" stroke="red" />
-      </LineChart>
-    </ResponsiveContainer>
+    <LineChart data={data} margin={{ top: 5, right: 50, left: 0, bottom: 5 }}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="timestamp" />
+      <YAxis domain={[-100, 100]} />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="value" stroke="black" />
+    </LineChart>
   );
 };
 

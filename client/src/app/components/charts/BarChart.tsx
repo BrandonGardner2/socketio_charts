@@ -16,7 +16,7 @@ import CustomizedAxisTick from './utils/CustomTick';
 const ANIMATION_DURATION = 500;
 // Color could be something I allow the user to select.
 // Just hard coding for now.
-const color = 'red';
+const color = '#00c49e';
 
 const BarChartComponent: React.FunctionComponent = () => {
   const data = useSelector(getPerCategorySelector);

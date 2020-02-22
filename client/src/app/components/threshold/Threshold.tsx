@@ -1,14 +1,17 @@
 import React, { ReactElement, MouseEvent, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-
-import useThreshold from '../../store/hooks/useThreshold';
 import { toast } from 'react-toastify';
 
+import useThreshold from '../../store/hooks/useThreshold';
+import { getThresholdSelector } from '../../store/selectors/alerts.selectors';
+
 const Threshold = (): ReactElement => {
+  const threshold = useSelector(getThresholdSelector);
   const [clearThreshold, setThreshold] = useThreshold();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const updateThreshold = (e: MouseEvent): void => {
+  const updateThreshold = (_: MouseEvent): void => {
     const value = inputRef.current?.value;
 
     if (!value) {
@@ -24,6 +27,9 @@ const Threshold = (): ReactElement => {
 
   return (
     <ThresholdContainer>
+      {typeof threshold === 'number' ? (
+        <ThresholdText>{threshold}</ThresholdText>
+      ) : null}
       <ThresholdInput
         min={-100}
         max={100}
@@ -48,6 +54,14 @@ const ThresholdContainer = styled.div`
   @media (min-width: 1200px) {
     width: 30%;
   }
+`;
+
+const ThresholdText = styled.p`
+  color: red;
+  font-weight: bold;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
 `;
 
 const ThresholdInput = styled.input`

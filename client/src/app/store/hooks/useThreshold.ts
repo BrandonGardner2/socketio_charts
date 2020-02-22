@@ -1,32 +1,32 @@
-import {
-  useState,
-  useMemo,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  MouseEvent
-} from 'react';
-import { useSelector } from 'react-redux';
+import { useMemo, useEffect, useCallback, MouseEvent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { updateThreshold } from '../reducers/alerts/alerts.reducer';
 import { getDataSelector } from '../selectors/data.selectors';
+import { getThresholdSelector } from '../selectors/alerts.selectors';
 
-type Threshold = number | undefined;
-
-type UseThresholdReturn = [
-  (event: MouseEvent) => void,
-  Dispatch<SetStateAction<Threshold>>
-];
+type UseThresholdReturn = [(event: MouseEvent) => void, (val: number) => void];
 
 const useThreshold = (): UseThresholdReturn => {
-  const [threshold, setThreshold] = useState<Threshold>();
+  const dispatch = useDispatch();
+  const threshold = useSelector(getThresholdSelector);
   const data = useSelector(getDataSelector);
 
-  const clearThreshold = useCallback((_: MouseEvent): void => {
-    setThreshold(undefined);
-  }, []);
+  const setThreshold = useCallback(
+    (val: number | undefined) => {
+      dispatch(updateThreshold(val));
+    },
+    [dispatch]
+  );
+
+  const clearThreshold = useCallback(
+    (_: MouseEvent): void => {
+      setThreshold(undefined);
+    },
+    [setThreshold]
+  );
 
   const shouldSendAlert = useMemo<boolean>(() => {
     return (

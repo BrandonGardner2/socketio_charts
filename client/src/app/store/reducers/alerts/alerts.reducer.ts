@@ -12,7 +12,10 @@ const alertSlice = createSlice({
   name: 'alerts',
   initialState: createInitialAlertState(),
   reducers: {
-    setThreshold(state: AlertState, action: PayloadAction<number>) {
+    updateThreshold(
+      state: AlertState,
+      action: PayloadAction<number | undefined>
+    ): void {
       state.threshold = action.payload;
     }
   }
@@ -21,5 +24,5 @@ const alertSlice = createSlice({
 const { actions, reducer: alertReducer } = alertSlice;
 
 export { createInitialAlertState };
-export const { setThreshold } = actions;
+export const { updateThreshold } = actions;
 export default alertReducer;

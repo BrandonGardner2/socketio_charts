@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
-export interface ChartData {
+export interface RawData {
   value: number;
   timestamp: string;
+}
+export interface ChartData {
+  value: number;
+  key: string;
 }
 
 export interface PerCategory {
@@ -43,11 +47,11 @@ const dataSlice = createSlice({
   name: 'data',
   initialState: createInitialDataState(),
   reducers: {
-    addData(state: DataState, action: PayloadAction<ChartData>): void {
+    addData(state: DataState, action: PayloadAction<RawData>): void {
       const point = action.payload;
-      const newPoint = {
+      const newPoint: ChartData = {
         value: Number(point.value.toFixed(2)),
-        timestamp: moment(point.timestamp).format('H:mm:ss')
+        key: moment(point.timestamp).format('H:mm:ss')
       };
 
       state.data.push(newPoint);

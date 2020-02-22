@@ -29,7 +29,7 @@ const BarChartComponent: React.FunctionComponent = () => {
   const key = `svg${color}`;
   return (
     <ResponsiveContainer height="60%">
-      <BarChart data={data} margin={{ left: -10 }}>
+      <BarChart data={data} margin={{ right: 10 }}>
         <defs>
           <linearGradient id={key} x1="0.5" y1="0" x2="0.5" y2="1">
             <stop offset="0%" stopColor={color} stopOpacity={1} />

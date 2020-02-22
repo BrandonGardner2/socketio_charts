@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
 
 import startSocketIOService from './socketio.service';
-import { addData, ChartData } from '../store/reducers/data/data.reducer';
+import { addData, RawData } from '../store/reducers/data/data.reducer';
 
 type CreateSocketCallback = () => void;
 
@@ -12,7 +12,7 @@ const useDataSocket = (): CreateSocketCallback => {
 
   // As new data comes in we will add it to the redux store
   const handleNewData = useCallback(
-    (newData: ChartData) => {
+    (newData: RawData) => {
       dispatch(addData(newData));
     },
     [dispatch]

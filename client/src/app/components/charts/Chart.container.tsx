@@ -4,11 +4,6 @@ import styled from 'styled-components';
 import BarChartComponent from './BarChart';
 import LineChartComponent from './LineChart';
 
-type ChartData = {
-  value: number | string;
-  key: string;
-};
-
 export enum ChartType {
   BAR = 'BAR',
   LINE = 'LINE'

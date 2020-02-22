@@ -18,9 +18,9 @@ const LineChartComponent = (): ReactElement => {
 
   return (
     <ResponsiveContainer height="77.5%">
-      <LineChart data={data} margin={{ top: 5, right: 50, left: 0, bottom: 5 }}>
+      <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="timestamp" tick={CustomizedAxisTick} />
+        <XAxis dataKey="key" tick={CustomizedAxisTick} />
         <YAxis domain={[-100, 100]} />
         <Tooltip />
         <Line type="monotone" dataKey="value" stroke="#00c49e" />

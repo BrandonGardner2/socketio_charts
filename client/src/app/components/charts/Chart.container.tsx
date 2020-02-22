@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { ChartType } from '../../store/reducers/charts/charts.reducer';
 import BarChartComponent from './BarChart';
 import LineChartComponent from './LineChart';
-import { ResponsiveContainer } from 'recharts';
 
 type ChartData = {
   value: number | string;
@@ -27,25 +26,36 @@ const ChartContainer = ({ metric, chartType }: ChartProps): ReactElement => {
   }, [chartType]);
 
   return (
-    <ChartWrapper>
+    <Container>
       <ChartTitle>{metric}</ChartTitle>
-      <ResponsiveContainer height="80%">{Chart}</ResponsiveContainer>
-    </ChartWrapper>
+      <ChartWrapper>{Chart}</ChartWrapper>
+    </Container>
   );
 };
 
 export default ChartContainer;
 
-const ChartWrapper = styled.div`
-  width: 45%;
+const Container = styled.div`
+  width: 100%;
   height: 300px;
   margin: 30px auto;
-  padding-bottom: 15px;
   background: white;
   color: black;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+
+  @media (min-width: 1200px) {
+    width: 45%;
+  }
+`;
+
+const ChartWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85%;
+  width: 100%;
 
   svg.recharts-surface {
     overflow: visible;

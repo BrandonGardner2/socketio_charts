@@ -21,7 +21,10 @@ const Threshold = (): ReactElement => {
       if (num > 100 || num < -100) {
         // The min/max could come from some kind of config. I'm just hard coding for this project.
         toast.error('The alert value must be between -100 and 100.');
-      } else setThreshold(num);
+      } else {
+        setThreshold(num);
+        inputRef.current && (inputRef.current.value = '');
+      }
     }
   };
 

@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 import useDataSocket from './network/socketio.hook';
 import styled from 'styled-components';
 import Dashboard from './components/dashboard/Dashboard';
+import { ToastContainer, toast } from 'react-toastify';
+
+toast.configure();
 
 function App(): React.ReactElement {
   const startListening = useDataSocket();
@@ -14,6 +17,7 @@ function App(): React.ReactElement {
   return (
     <AppContainer>
       <Dashboard />
+      <ToastContainer />
     </AppContainer>
   );
 }

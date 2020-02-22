@@ -28,7 +28,7 @@ const Threshold = (): ReactElement => {
   return (
     <ThresholdContainer>
       {typeof threshold === 'number' ? (
-        <ThresholdText>{threshold}</ThresholdText>
+        <ThresholdText>{`Threshold: ${threshold}`}</ThresholdText>
       ) : null}
       <ThresholdInput
         min={-100}
@@ -66,7 +66,7 @@ const ThresholdText = styled.p`
 
 const ThresholdInput = styled.input`
   outline: none;
-  min-width: 100px;
+  min-width: 75px;
 `;
 
 const ThresholdBtn = styled.button`

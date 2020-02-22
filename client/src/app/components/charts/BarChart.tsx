@@ -1,4 +1,4 @@
-import React, { useMemo, ReactElement } from 'react';
+import React, { useMemo } from 'react';
 import {
   Bar,
   BarChart,
@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 import { useSelector } from 'react-redux';
 import { getPerCategorySelector } from '../../store/selectors/data.selectors';
+import CustomizedAxisTick from './utils/CustomTick';
 
 const ANIMATION_DURATION = 500;
 // Color could be something I allow the user to select.
@@ -60,30 +61,6 @@ const BarChartComponent: React.FunctionComponent = () => {
         <Tooltip active={true} />
       </BarChart>
     </ResponsiveContainer>
-  );
-};
-
-interface TickProps {
-  x: number;
-  y: number;
-  payload: {
-    value: string;
-  };
-}
-
-const CustomizedAxisTick = ({ x, y, payload }: TickProps): ReactElement => {
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text
-        x={0}
-        y={0}
-        dy={16}
-        textAnchor="end"
-        fill="#666"
-        transform="rotate(-35)">
-        {payload.value}
-      </text>
-    </g>
   );
 };
 

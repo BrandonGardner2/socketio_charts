@@ -1,9 +1,11 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
-import ChartContainer, { ChartProps } from '../charts/Chart.container';
+import ChartContainer, {
+  ChartProps,
+  ChartType
+} from '../charts/Chart.container';
 import Header from '../header/Header';
-import { ChartType } from '../../store/reducers/charts/charts.reducer';
 
 const Dashboard = (): ReactElement => {
   const metrics = mockMetrics;

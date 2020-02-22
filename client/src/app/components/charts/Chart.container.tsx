@@ -1,7 +1,6 @@
 import React, { ReactElement, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { ChartType } from '../../store/reducers/charts/charts.reducer';
 import BarChartComponent from './BarChart';
 import LineChartComponent from './LineChart';
 
@@ -9,6 +8,11 @@ type ChartData = {
   value: number | string;
   key: string;
 };
+
+export enum ChartType {
+  BAR = 'BAR',
+  LINE = 'LINE'
+}
 export interface ChartProps {
   metric: string;
   chartType: ChartType;

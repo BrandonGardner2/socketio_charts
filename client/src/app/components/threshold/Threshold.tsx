@@ -30,10 +30,10 @@ const Threshold = (): ReactElement => {
 
   return (
     <ThresholdContainer>
-      {typeof threshold === 'number' ? (
-        <ThresholdText>{`Threshold: ${threshold}`}</ThresholdText>
-      ) : null}
+      <ThresholdText htmlFor="threshold">{`Threshold: ${threshold ||
+        'N/A'}`}</ThresholdText>
       <ThresholdInput
+        id="threshold"
         min={-100}
         max={100}
         placeholder="-100 to 100"
@@ -55,11 +55,11 @@ const ThresholdContainer = styled.div`
   width: 100%;
 
   @media (min-width: 1200px) {
-    width: 30%;
+    width: 35%;
   }
 `;
 
-const ThresholdText = styled.p`
+const ThresholdText = styled.label`
   color: red;
   font-weight: bold;
   margin: 0 5px;
@@ -89,6 +89,6 @@ const ThresholdBtn = styled.button`
 `;
 
 const ThresholdClearBtn = styled(ThresholdBtn)`
-  background: maroon;
+  background: red;
   color: white;
 `;

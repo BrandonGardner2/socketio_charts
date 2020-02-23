@@ -1,5 +1,5 @@
-import React, { ReactComponentElement, ReactElement } from 'react';
-import { render, fireEvent, RenderResult } from '@testing-library/react';
+import React from 'react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 
 import Header from '../Header';

@@ -28,7 +28,7 @@ const Dashboard = (): ReactElement => {
 
 export default Dashboard;
 
-const mockMetrics: ChartProps[] = [
+export const mockMetrics: ChartProps[] = [
   {
     metric: Metrics['Data Feed'],
     chartType: ChartType.LINE

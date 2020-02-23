@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 // height in a Node environment. I am spying on console warn just to
 // beat it. Planning to look into bypassing this later, as GitHub / SO
 // didn't provide many answers.
+// https://github.com/recharts/recharts/issues/727
 const consoleSpy = jest
   .spyOn(global.console, 'warn')
   .mockImplementation(() => null);

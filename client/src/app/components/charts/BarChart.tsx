@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, ReactElement } from 'react';
 import {
   Bar,
   BarChart,
@@ -9,20 +9,23 @@ import {
   ResponsiveContainer,
   ReferenceLine
 } from 'recharts';
-import { useSelector } from 'react-redux';
-import { getPerCategorySelector } from '../../store/selectors/data.selectors';
+
 import CustomizedAxisTick from './utils/CustomTick';
+import { ChartData } from '../../store/reducers/data/data.reducer';
 
 const ANIMATION_DURATION = 500;
 // Color could be something I allow the user to select.
 // Just hard coding for now.
 const color = '#00c49e';
 
-const BarChartComponent: React.FunctionComponent = () => {
-  const data = useSelector(getPerCategorySelector);
+interface OwnProps {
+  data: ChartData[];
+}
+
+const BarChartComponent = ({ data }: OwnProps): ReactElement => {
   const dataMax = useMemo(() => {
     return (
-      data.reduce((acc, cur) => (cur.total > acc ? cur.total : acc), 0) + 1
+      data.reduce((acc, cur) => (cur.value > acc ? cur.value : acc), 0) + 1
     );
   }, [data]);
 
@@ -53,7 +56,7 @@ const BarChartComponent: React.FunctionComponent = () => {
           interval={0}
         />
         <ReferenceLine y={0} strokeDasharray="2 2" className={'zero-line'} />
-        <Bar dataKey="total" animationDuration={ANIMATION_DURATION}>
+        <Bar dataKey="value" animationDuration={ANIMATION_DURATION}>
           {data.map((_, index) => (
             <Cell key={`cell-${index}`} fill={`url(#${key})`} />
           ))}

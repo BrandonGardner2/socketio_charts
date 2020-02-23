@@ -10,9 +10,7 @@ export interface ChartData {
   key: string;
 }
 
-export interface PerCategory {
-  key: string;
-  total: number;
+export interface PerCategory extends ChartData {
   max: number;
   min: number;
 }
@@ -30,7 +28,7 @@ const generateInitialPerCategory = (): PerCategory[] => {
       key: `${i} - ${i + 10}`,
       max: i + 10,
       min: i,
-      total: 0
+      value: 0
     });
     i += 10;
   }
@@ -60,7 +58,7 @@ const dataSlice = createSlice({
         return category.min < newPoint.value && category.max > newPoint.value;
       });
 
-      state.perCategory[index].total += 1;
+      state.perCategory[index].value += 1;
     }
   }
 });

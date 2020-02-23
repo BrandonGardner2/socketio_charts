@@ -8,14 +8,15 @@ import {
   Line,
   ResponsiveContainer
 } from 'recharts';
-import { useSelector } from 'react-redux';
 
-import { getDataSelector } from '../../store/selectors/data.selectors';
+import { ChartData } from '../../store/reducers/data/data.reducer';
 import CustomizedAxisTick from './utils/CustomTick';
 
-const LineChartComponent = (): ReactElement => {
-  const data = useSelector(getDataSelector);
+interface OwnProps {
+  data: ChartData[];
+}
 
+const LineChartComponent = ({ data }: OwnProps): ReactElement => {
   return (
     <ResponsiveContainer height="77.5%">
       <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>

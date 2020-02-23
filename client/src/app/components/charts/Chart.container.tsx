@@ -1,28 +1,35 @@
 import React, { ReactElement, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import BarChartComponent from './BarChart';
 import LineChartComponent from './LineChart';
+import {
+  getDataForMetricSelector,
+  Metrics
+} from '../../store/selectors/data.selectors';
 
 export enum ChartType {
   BAR = 'BAR',
   LINE = 'LINE'
 }
 export interface ChartProps {
-  metric: string;
+  metric: Metrics;
   chartType: ChartType;
 }
 
 const ChartContainer = ({ metric, chartType }: ChartProps): ReactElement => {
+  const chartData = useSelector(getDataForMetricSelector)(metric);
+
   const Chart = useMemo(() => {
     switch (chartType) {
       case ChartType.LINE:
-        return <LineChartComponent />;
+        return <LineChartComponent data={chartData} />;
       case ChartType.BAR:
       default:
-        return <BarChartComponent />;
+        return <BarChartComponent data={chartData} />;
     }
-  }, [chartType]);
+  }, [chartType, chartData]);
 
   return (
     <Container>

@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
+import { Metrics } from '../../store/selectors/data.selectors';
 import ChartContainer, {
   ChartProps,
   ChartType
@@ -29,11 +30,11 @@ export default Dashboard;
 
 const mockMetrics: ChartProps[] = [
   {
-    metric: 'Data Feed',
+    metric: Metrics['Data Feed'],
     chartType: ChartType.LINE
   },
   {
-    metric: 'Data Per Category',
+    metric: Metrics['Data Per Category'],
     chartType: ChartType.BAR
   }
 ];

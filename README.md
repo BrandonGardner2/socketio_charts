@@ -1,6 +1,6 @@
 # Brandon Gardner - Corva Challenge
 
-View my portion of the readme ['here'](./client/README.md)!
+View my portion of the readme [here](./client/README.md)!
 
 # Task Delivery
 

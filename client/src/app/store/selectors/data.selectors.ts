@@ -5,16 +5,6 @@ import { RootState } from '../reducers/root-reducer';
 
 const dataStateSelector = (state: RootState): DataState => state.dataState;
 
-const getDataSelector = createSelector(
-  dataStateSelector,
-  (dataState) => dataState.data
-);
-
-const getPerCategorySelector = createSelector(
-  dataStateSelector,
-  (dataState) => dataState.perCategory
-);
-
 // This isn't ideal. Just being used for this challenge as I know what the values will be.
 export enum Metrics {
   'Data Feed' = 'Data Feed',
@@ -34,4 +24,4 @@ const getDataForMetricSelector = createSelector(
   }
 );
 
-export { getDataForMetricSelector, getDataSelector, getPerCategorySelector };
+export { getDataForMetricSelector };

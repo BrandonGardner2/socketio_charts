@@ -11,8 +11,8 @@ const consoleSpy = jest
 
 const mockData = [{ key: 'mock', value: 1 }];
 
-describe('Bar chart tests', () => {
-  test('it should render a bar chat with or without data', () => {
+describe('Line chart tests', () => {
+  test('it should render a line chat with or without data', () => {
     const { rerender } = render(<LineChart data={mockData} />);
     rerender(<LineChart data={[]} />);
 

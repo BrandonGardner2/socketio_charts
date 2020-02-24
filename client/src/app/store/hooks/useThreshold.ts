@@ -1,10 +1,11 @@
+import { Metrics } from './../selectors/data.selectors';
 import { useMemo, useEffect, useCallback, MouseEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { updateThreshold } from '../reducers/alerts/alerts.reducer';
-import { getDataSelector } from '../selectors/data.selectors';
+import { getDataForMetricSelector } from '../selectors/data.selectors';
 import { getThresholdSelector } from '../selectors/alerts.selectors';
 
 type UseThresholdReturn = [(event: MouseEvent) => void, (val: number) => void];
@@ -12,7 +13,7 @@ type UseThresholdReturn = [(event: MouseEvent) => void, (val: number) => void];
 const useThreshold = (): UseThresholdReturn => {
   const dispatch = useDispatch();
   const threshold = useSelector(getThresholdSelector);
-  const data = useSelector(getDataSelector);
+  const data = useSelector(getDataForMetricSelector)(Metrics['Data Feed']);
 
   const setThreshold = useCallback(
     (val: number | undefined) => {
